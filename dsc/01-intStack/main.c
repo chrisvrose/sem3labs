@@ -60,7 +60,7 @@ int SPopN(Stack* stack,int n){
 			if(SPop(stack,&outVar)){
 				fprintf(stderr,"E:Error Popping\n");
 			}
-			printf("Popped:%d",outVar);
+			printf("Popped:%d\n",outVar);
 			n-=1;
 		}
 		return 0;
@@ -69,7 +69,7 @@ int SPopN(Stack* stack,int n){
 
 ///Return 1 if not enough elements
 int S3FromTop(Stack* stack,int *y){
-	Stack tempStack;int outVar,i;
+	Stack tempStack;int outVar,i;SInit(&tempStack);
 	if(stack->top>2){
 		for(i=1;i<3;i++){
 			SPop(stack,&outVar);
@@ -148,6 +148,7 @@ int main(){
 				}
 				y = outVar;
 				printf("y = %d\n",y);
+				break;
 			case 5:
 				printf("How many elements to pop?\n:");
 				scanf("%d",&outVar);
@@ -162,6 +163,7 @@ int main(){
 				}
 				y = outVar;
 				printf("y = %d\n",y);
+				break;
 			case 7:
 				return 0;
 			default:
