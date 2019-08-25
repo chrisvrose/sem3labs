@@ -37,16 +37,6 @@ int SPush(Stack* stack, int element){
 	}
 }
 
-int SPeek(Stack* stack, int* returnVar){
-	if(stack->top==-1){
-		return 1;
-	}
-	else{
-		*returnVar =  stack->stack[stack->top];
-		return 0;
-	}
-}
-
 
 ///Program specific implementation
 
