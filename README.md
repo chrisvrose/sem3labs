@@ -14,4 +14,5 @@ A list of programs developed and used for the labs.
 
 ### DSC
 
-- [ ] Integer stack functions
+- [ ] Stack Operations
+- [ ] Infix to Postfix using Stacks
