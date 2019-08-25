@@ -98,7 +98,6 @@ int S3FromBottom(Stack* stack,int *y){
 			SPop(stack,&outVar);
 			SPush(&tempStack,outVar);
 		}
-		*y = stack->stack[stack->top];
 		///Store in y
 		*y = stack->stack[stack->top];
 		///Restore
@@ -118,7 +117,7 @@ int S3FromBottom(Stack* stack,int *y){
 const char menu[] = "Options:\n1.Push\n2.Pop\n3.Display\n4.3rd from Top\n5. Pop N elements\n6.3rd from Bottom\n7.Exit";
 int main(){
 	Stack s1;SInit(&s1);
-	int outVar, y;char choice;
+	int outVar, y;
 	for(int a=0;(printf("%s\n:",menu),scanf("%d",&a))==1;){
 		switch(a){
 			case 1:
@@ -154,6 +153,8 @@ int main(){
 				scanf("%d",&outVar);
 				if(!SPopN(&s1,outVar)){
 					printf("I:Popped %d elements\n",outVar);
+				}else{
+					fprintf(stderr,"E:Not enough elements\n");
 				}
 				break;
 			case 6:
