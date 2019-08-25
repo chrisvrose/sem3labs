@@ -9,10 +9,10 @@ A list of programs developed and used for the labs.
 
 ### OS
 
-- [ ] cp,ls (-l),rm,mv
+- [X] cp,ls (-l),rm,mv
 - [ ] Process system calls
 
 ### DSC
 
-- [ ] Stack Operations
+- [X] Stack Operations
 - [ ] Infix to Postfix using Stacks
