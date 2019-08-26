@@ -122,6 +122,7 @@ int main(){
 				}
 				break;
 			case 2:
+				printf("I:Exiting\n");
 				return 0;
 			default:
 				fprintf(stderr,"E:Invalid choice\n");
