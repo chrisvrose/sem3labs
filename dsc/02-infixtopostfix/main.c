@@ -72,7 +72,7 @@ int getPriority(char token){
 int infixToPostfix(char* inputFix,char *outputFix){
 	Stack stack;SInit(&stack);int j=0;
 	for(int i=0;inputFix[i]!=0;i++){
-		if(isalnum(inputFix[i]){
+		if(isalnum(inputFix[i])){
 			outputFix[j++]=inputFix[i];
 		}
 		if(getPriority(inputFix[i])!=3&&inputFix[i]!=')'){
@@ -81,7 +81,7 @@ int infixToPostfix(char* inputFix,char *outputFix){
 		else{
 			int outVar1,outVar2;
 			SPeek(&stack,&outVar1);
-			while(getPriority((char)outVar)>=getPriority(inputFix[i]){
+			while(getPriority((char)outVar1)>=getPriority(inputFix[i])){
 				if(!SPop(&stack,&outVar2)){
 					fprintf(stderr,"E:Error converting\n");
 					return 1;
@@ -93,7 +93,7 @@ int infixToPostfix(char* inputFix,char *outputFix){
 			
 		}
 	}
-	while(SEmpty(&stack){
+	while(SEmpty(&stack)){
 		int outVar1;
 		SPop(&stack,&outVar1);
 		outputFix[j++]=outVar1;

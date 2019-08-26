@@ -16,7 +16,7 @@ int main(int argc,char* argv[]){
     }
     for(int i=1;i<argc;i++){
         if(unlink(argv[i])!=0){
-            fprintf(stderr,"E:Cannot remove file: %d\n",argv[i]);
+            fprintf(stderr,"E:Cannot remove file: %s\n",argv[i]);
             continue;
         }
     }
