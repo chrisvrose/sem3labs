@@ -126,6 +126,7 @@ int main(){
 				return 0;
 			default:
 				fprintf(stderr,"E:Invalid choice\n");
+				return 1;
 		}
 	}
 	return 0;
