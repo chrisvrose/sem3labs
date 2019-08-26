@@ -15,7 +15,7 @@ int main(int argc,char* argv[]){
         return 0;
     }
     if(argc>3){
-        fprintf(stderr,"E:Not enough arguments.\n");
+        fprintf(stderr,"W:Too many arguments.\n");
         return 1;
     }
     int oldfd = open(argv[1],O_RDONLY);
