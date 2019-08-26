@@ -56,7 +56,7 @@ int SPopN(Stack* stack,int n){
 	}
 	else{
 		int outVar;
-		while(n!=-1){
+		while(n!=0){
 			if(SPop(stack,&outVar)){
 				fprintf(stderr,"E:Error Popping\n");
 			}
@@ -70,7 +70,7 @@ int SPopN(Stack* stack,int n){
 ///Return 1 if not enough elements
 int S3FromTop(Stack* stack,int *y){
 	Stack tempStack;int outVar,i;SInit(&tempStack);
-	if(stack->top>2){
+	if(stack->top>=2){
 		for(i=1;i<3;i++){
 			SPop(stack,&outVar);
 			SPush(&tempStack,outVar);
@@ -90,7 +90,7 @@ int S3FromTop(Stack* stack,int *y){
 
 ///Return 1 if not enough space
 int S3FromBottom(Stack* stack,int *y){
-	if(stack->top>2){
+	if(stack->top>=2){
 		///Assume Stacks have same length & >3, so push and pop must always work.
 		Stack tempStack;int outVar;
 		SInit(&tempStack);
