@@ -14,7 +14,7 @@ int main(int argc,char* argv[]){
         printf("Usage: mv <old/path> <new/path>\n");
         return 0;
     }
-    if(argc>3){
+    if(argc<3){
         fprintf(stderr,"E:Not enough arguments.\n");
         return 1;
     }
@@ -25,7 +25,7 @@ int main(int argc,char* argv[]){
     }
     int newfd = open(argv[2],O_WRONLY|O_CREAT,0644);
     if(newfd<0){
-        fprintf(stderr,"E:Unable to create new file for copy or file already exists.\n");
+        fprintf(stderr,"E:Error opening destination for write.\n");
         return 1;
     }
     char buffer[BSIZE];

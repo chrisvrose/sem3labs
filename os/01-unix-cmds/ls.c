@@ -31,7 +31,7 @@ int findArgs(int argc,char* argv[],int startFromPosition){
     return flagPos;
 }
 
-///Get the real number of arguments, skipping flags passed to program
+///Get the no. of non flag arguments
 int getRealArgs(char*  argv[],int argc){
     int realArgs=0;
     for(int i=0;i<argc;i++){
@@ -127,7 +127,7 @@ int main(int argc,char *argv[]){
     int findl = 0;
     ///find ls '-l'
     for(int i=0;i<argc;i++){
-        if(argv[i][0]=='-'&&argv[i][0]=='\0'){
+        if(argv[i][0]=='-'&&argv[i][0]!='\0'){
             if(argv[i][1]=='l'){
                 findl=1;
             }
@@ -143,15 +143,12 @@ int main(int argc,char *argv[]){
     }
     else{
         argSensible = findArgs(argc,argv,1);
-        if(argSensible==-1){
-            fprintf(stderr,"E:Could not find file\n");
-            return 1;
-        }
         openLocation = argv[argSensible];
         //d = opendir(openLocation);
     }
     if( (d = opendir(openLocation)) == NULL){
         fprintf(stderr,"E: Could not open directory. Check path\n");
+        return 1;
     }
 
     
@@ -160,7 +157,7 @@ int main(int argc,char *argv[]){
     struct tm *lastTm;
     char lastMergePath[BSIZE],lastPerms[11],lastUid[BSIZE],lastGid[BSIZE],*lastAccT;
     int lastAccTl;
-    if(!findl){
+    if(findl){
         //printf("W:Not implemented\n");
         while((lastDir = readdir(d))!=NULL){
             //printf("OH DEAR HERE WE GO %s\n",openLocation);
@@ -181,8 +178,9 @@ int main(int argc,char *argv[]){
     }
     else{
         while((lastDir = readdir(d))!=NULL){
-            printf("%s\n",lastDir->d_name);
+            printf("%s ",lastDir->d_name);
         }
+        printf("\n");
     }
     
 

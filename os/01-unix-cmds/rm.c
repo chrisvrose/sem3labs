@@ -7,8 +7,6 @@
 #include<unistd.h>
 
 
-#define BSIZE 64
-
 int main(int argc,char* argv[]){
     if(argc==1){
         printf("Usage: rm <file1> [file2] ...\n");
