@@ -8,14 +8,14 @@
 
 typedef struct Stack{
 	int top;
-	int stack[STACK_LEN];
+	char stack[STACK_LEN];
 }Stack;
 
 void SInit(Stack* stack){
 	stack->top=-1;
 }
 
-int SPop(Stack* stack, int* returnVar){
+int SPop(Stack* stack, char* returnVar){
 	if(stack->top==-1){
 	return 1;
 	}
@@ -28,7 +28,7 @@ int SPop(Stack* stack, int* returnVar){
 
 
 
-int SPush(Stack* stack, int element){
+int SPush(Stack* stack, char element){
 	if(stack->top == STACK_LEN-1){
 		return 1;
 	}
@@ -39,7 +39,7 @@ int SPush(Stack* stack, int element){
 	}
 }
 
-int SPeek(Stack* stack,int *element){
+int SPeek(Stack* stack,char *element){
 	if(stack->top==-1)
 		return 1;
 	else{
@@ -58,8 +58,8 @@ int SEmpty(Stack *stack){
 
 ///Program specific implementation
 
-int getPriority(char token){
-	if(token=='(')
+char getPriority(char token){
+	if(token=='('||token==')')
 		return 0;
 	if(token=='+'||token=='-')
 		return 1;
@@ -71,29 +71,36 @@ int getPriority(char token){
 
 int infixToPostfix(char* inputFix,char *outputFix){
 	Stack stack;SInit(&stack);int j=0;
+	char outVar1,outVar2;
 	for(int i=0;inputFix[i]!=0;i++){
-		if(isalnum(inputFix[i])){
+		if(isalnum(inputFix[i])){//literal
 			outputFix[j++]=inputFix[i];
-		}
-		if(getPriority(inputFix[i])!=3&&inputFix[i]!=')'){
+		}else if(getPriority(inputFix[i])==2&&inputFix[i]!=')'){//Opening
 			SPush(&stack,inputFix[i]);
+		}else if(inputFix[i]==')'){
+			SPop(&stack,&outVar1);
+			while(outVar1!='('){
+				outputFix[j++]=(char)outVar1;
+				SPop(&stack,&outVar1);
+			}
 		}
 		else{
-			int outVar1,outVar2;
-			SPeek(&stack,&outVar1);
-			while(getPriority((char)outVar1)>=getPriority(inputFix[i])){
-				if(!SPop(&stack,&outVar2)){
-					fprintf(stderr,"E:Error converting\n");
-					return 1;
-				}else{
-					outputFix[j++]=outVar2;
+			int ret = SPeek(&stack,&outVar1);
+			if(!SEmpty(&stack)){
+				while(getPriority((char)outVar1)>=getPriority(inputFix[i])&&!SEmpty(&stack)){
+					if(SPop(&stack,&outVar2)){
+						//outVar1='(';
+						fprintf(stderr,"Something went wrong");
+					}else{
+						outputFix[j++]=(char)outVar2;
+					}
 				}
 			}
 			SPush(&stack,inputFix[i]);
 			
 		}
 	}
-	while(SEmpty(&stack)){
+	while(!SEmpty(&stack)){
 		int outVar1;
 		SPop(&stack,&outVar1);
 		outputFix[j++]=outVar1;
@@ -105,7 +112,7 @@ int infixToPostfix(char* inputFix,char *outputFix){
 
 
 
-const char menu[] = "Options:\n1.Enter expression2.Exit";
+const char menu[] = "Options:\n1.Enter expression\n2.Exit";
 int main(){
 	Stack s1;SInit(&s1);
 	int outVar, y;char inputString[20],outputString[20];
@@ -114,8 +121,10 @@ int main(){
 		switch(a){
 			case 1:
 				printf("Enter expression\n:");
-				scanf("%[^\n]",inputString);
-				if(infixToPostfix(inputString,outputString)){
+				scanf(" %s",inputString);
+				fflush(stdin);
+				//printf(" %s",inputString);
+				if(!infixToPostfix(inputString,outputString)){
 					printf("Expression: %s\n",outputString);
 				}else{
 					fprintf(stderr,"E: Could not convert\n");
