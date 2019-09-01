@@ -85,8 +85,7 @@ int infixToPostfix(char* inputFix,char *outputFix){
 			}
 		}
 		else{
-			int ret = SPeek(&stack,&outVar1);
-			if(!SEmpty(&stack)){
+			if(!SPeek(&stack,&outVar1)){
 				while(getPriority((char)outVar1)>=getPriority(inputFix[i])&&!SEmpty(&stack)){
 					if(SPop(&stack,&outVar2)){
 						//outVar1='(';
@@ -101,7 +100,7 @@ int infixToPostfix(char* inputFix,char *outputFix){
 		}
 	}
 	while(!SEmpty(&stack)){
-		int outVar1;
+		char outVar1;
 		SPop(&stack,&outVar1);
 		outputFix[j++]=outVar1;
 	}
