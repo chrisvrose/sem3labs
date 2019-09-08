@@ -2,6 +2,8 @@
 
 A list of programs developed and used for the labs.
 
+Note: This is reference purposes.
+
 ## Topics
 
 - OS
@@ -10,7 +12,7 @@ A list of programs developed and used for the labs.
 ### OS
 
 - [X] cp,ls (-l),rm,mv
-- [ ] Process system calls
+- [X] Process system calls - exec,etc
 
 ### DSC
 
