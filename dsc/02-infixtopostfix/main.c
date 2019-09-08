@@ -71,28 +71,29 @@ char getPriority(char token){
 
 int infixToPostfix(char* inputFix,char *outputFix){
 	Stack stack;SInit(&stack);int j=0;
-	char outVar1,outVar2;
+	char outVar1;
 	for(int i=0;inputFix[i]!=0;i++){
 		if(isalnum(inputFix[i])){//literal
 			outputFix[j++]=inputFix[i];
-		}else if(getPriority(inputFix[i])==2&&inputFix[i]!=')'){//Opening
+		}else if(inputFix[i]=='('){//Opening (
 			SPush(&stack,inputFix[i]);
 		}else if(inputFix[i]==')'){
 			SPop(&stack,&outVar1);
 			while(outVar1!='('){
-				outputFix[j++]=(char)outVar1;
+				outputFix[j++]=outVar1;
 				SPop(&stack,&outVar1);
 			}
 		}
 		else{
 			if(!SPeek(&stack,&outVar1)){
-				while(getPriority((char)outVar1)>=getPriority(inputFix[i])&&!SEmpty(&stack)){
-					if(SPop(&stack,&outVar2)){
+				while(getPriority(outVar1)>=getPriority(inputFix[i])&&!SEmpty(&stack)){
+					if(SPop(&stack,&outVar1)){
 						//outVar1='(';
 						fprintf(stderr,"Something went wrong");
 					}else{
-						outputFix[j++]=(char)outVar2;
+						outputFix[j++]=outVar1;
 					}
+					SPeek(&stack,&outVar1);
 				}
 			}
 			SPush(&stack,inputFix[i]);
@@ -111,31 +112,15 @@ int infixToPostfix(char* inputFix,char *outputFix){
 
 
 
-const char menu[] = "Options:\n1.Enter expression\n2.Exit";
 int main(){
-	Stack s1;SInit(&s1);
-	int outVar, y;char inputString[20],outputString[20];
-	printf("%s\n",menu);
-	for(int a=0;(printf("Command\n:",menu),scanf("%d",&a))==1;){
-		switch(a){
-			case 1:
-				printf("Enter expression\n:");
-				scanf(" %s",inputString);
-				fflush(stdin);
-				//printf(" %s",inputString);
-				if(!infixToPostfix(inputString,outputString)){
-					printf("Expression: %s\n",outputString);
-				}else{
-					fprintf(stderr,"E: Could not convert\n");
-				}
-				break;
-			case 2:
-				printf("I:Exiting\n");
-				return 0;
-			default:
-				fprintf(stderr,"E:Invalid choice\n");
-				return 1;
-		}
+	char inputString[20],outputString[20];
+	printf("Enter expression\n:");
+	fflush(stdin);
+	scanf(" %s",inputString);
+	//printf(" %s",inputString);
+	if(!infixToPostfix(inputString,outputString)){
+		printf("Expression: %s\n",outputString);
+	}else{
+		fprintf(stderr,"E: Could not convert\n");
 	}
-	return 0;
 }
