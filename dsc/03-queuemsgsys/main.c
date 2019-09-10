@@ -79,7 +79,6 @@ int main(){
 	cQ cq,*cqp;cqp = &cq;cQInit(cqp);
 	char bufferVar[strSIZE];
 	for(int a=0;(printf("%s\n:",menu),fflush(stdin),scanf("%d",&a)==1);){
-		//printf("%d",a);
 		switch(a){
 			case 1:
 				printf("Enter message\n:");
