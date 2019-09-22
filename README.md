@@ -13,8 +13,12 @@ Note: This is reference purposes.
 
 - [X] cp,ls (-l),rm,mv
 - [X] Process system calls - exec,etc
+- [X] Fork, exec calls
+- [X] Pthreads
 
 ### DSC
 
 - [X] Stack Operations
-- [ ] Infix to Postfix using Stacks
+- [X] Infix to Postfix using Stacks
+- [X] Messaging queues - circular
+- [X] Polynomial multiplication using Linked Lists
