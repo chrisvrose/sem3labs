@@ -60,7 +60,8 @@ node* insertFront(node* head,char data){
 node* removeRear(node* head,char *outVar){
 	//char outVar;
 	if(head==NULL){
-		return -1;
+		*outVar = -1;
+		return NULL;
 	}else if(head->next == head){
 		*outVar = (char)freeNode(head);
 		return NULL;
@@ -76,7 +77,9 @@ node* removeRear(node* head,char *outVar){
 }
 
 void displayList(node* ptr){
-	for(node* tmp=ptr;tmp->next!=ptr;tmp=tmp->next){
+	node* tmp=ptr;
+	for(int flag=0;tmp!=NULL&&(tmp!=ptr||flag!=1);tmp=tmp->next){
+		if(tmp==ptr)flag++;
 		printf("%c",tmp->data+'0');
 	}
 	printf("\n");
@@ -87,17 +90,19 @@ void displayList(node* ptr){
 node* Add(node* h1,node* h2){
 	node *h3=NULL,*hp1=h1,*hp2=h2;
 	///Assume Zeros padded already
-	for(int c=0;hp1->next!=h1 || hp2->next!=h2;((hp1=hp1->next),(hp2=hp2->next)) ){
+	for(int c=0,flag=1;hp1!=h1||flag;((hp1=hp1->next),(hp2=hp2->next)) ){
+		//Encountered head once, stop next time
+		if(hp1==h1)flag--;
 		//Add sum result
-		insertFront(h3,(hp1->data+hp2->data+c)%10 );
+		h3 = insertFront(h3,(hp1->data+hp2->data+c)%10 );
 		//Keep carry for later
-		c = hp1->data+hp2->data /10;
+		c = (hp1->data+hp2->data) /10;
 	}
 	return h3;
 }
 
 int main(){
-	char add1[STRLEN],add2[STRLEN],result[STRLEN];
+	char add1[STRLEN],add2[STRLEN],result[STRLEN],outVar;
 	int add1l=0,add2l=0,add3l,i;
 	///h3 will be result from add
 	node *h1=NULL,*h2=NULL,*h3=NULL;
@@ -110,11 +115,9 @@ int main(){
 	//Find length
 	while(add1[add1l++]);
 	while(add2[add2l++]);
-	printf("%d %d",add1l,add2l);
 	//fflush(stdout);
 	///Get total length required
 	add3l = add1l>add2l?add1l:add2l + 1;
-	
 	///Insert into lists
 	///Insert blanks
 	for(i=0;i<add3l-add1l;i++)
@@ -128,10 +131,10 @@ int main(){
 	for(i=0;i<add2l-1;i++)
 		h2 = insertFront(h2,add2[i]-'0');
 	h3 = Add(h1,h2);
-	//displayList(h1);
-	//displayList(h2);
-	displayList(h3);
-
+	for(i=0;i<add3l-1;i++){
+		h3 = removeRear(h3,&outVar);
+		printf("%c",outVar==-1?'?':outVar+'0');
+	}
 	/**/
 	return 0;
 }
