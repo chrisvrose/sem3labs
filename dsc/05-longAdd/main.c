@@ -57,6 +57,23 @@ node* insertFront(node* head,char data){
 	return head;
 }
 
+node* removeFront(node* head,char *outVar){
+	if(head==NULL){
+		*outVar=-1;
+		//return NULL;
+	}
+	else if(head->next==head){
+		*outVar=freeNode(head);
+		head = NULL;
+	}else{
+		node* newHead = head->next;
+		*outVar = freeNode(head);
+		head = newHead;
+
+	}
+	return head;
+}
+
 node* removeRear(node* head,char *outVar){
 	//char outVar;
 	if(head==NULL){
@@ -132,9 +149,9 @@ int main(){
 		h2 = insertFront(h2,add2[i]-'0');
 	h3 = Add(h1,h2);
 	for(i=0;i<add3l-1;i++){
-		h3 = removeRear(h3,&outVar);
+		h3 = removeFront(h3,&outVar);
 		printf("%c",outVar==-1?'?':outVar+'0');
 	}
-	/**/
+	printf("\n");
 	return 0;
 }
