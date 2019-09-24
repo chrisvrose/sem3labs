@@ -15,6 +15,10 @@ Note: This is reference purposes.
 - [X] Process system calls - exec,etc
 - [X] Fork, exec calls
 - [X] Pthreads
+- [ ] Process scheduling
+  - [X] Producer, Consumer
+  - [ ] Reader, Writer
+  - [ ] Diners'
 
 ### DSC
 
@@ -22,3 +26,4 @@ Note: This is reference purposes.
 - [X] Infix to Postfix using Stacks
 - [X] Messaging queues - circular
 - [X] Polynomial multiplication using Linked Lists
+- [X] Long addition
