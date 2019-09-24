@@ -44,6 +44,7 @@ node* insertFront(node* head,char data){
 	if(head==NULL){
 		head = newNode;
 		newNode->next = head;
+		//return head;
 	}//if theres other things too
 	else{
 		node* last;
@@ -75,7 +76,7 @@ node* removeRear(node* head,char *outVar){
 }
 
 void displayList(node* ptr){
-	for(node* tmp=ptr;tmp!=ptr;tmp=tmp->next){
+	for(node* tmp=ptr;tmp->next!=ptr;tmp=tmp->next){
 		printf("%c",tmp->data+'0');
 	}
 	printf("\n");
@@ -84,9 +85,9 @@ void displayList(node* ptr){
 
 ///Addition
 node* Add(node* h1,node* h2){
-	node *h3,*hp1=h1,*hp2=h2;
+	node *h3=NULL,*hp1=h1,*hp2=h2;
 	///Assume Zeros padded already
-	for(int c=0;hp1->next!=NULL || hp2->next!=NULL;((hp1=hp1->next),(hp2=hp2->next)) ){
+	for(int c=0;hp1->next!=h1 || hp2->next!=h2;((hp1=hp1->next),(hp2=hp2->next)) ){
 		//Add sum result
 		insertFront(h3,(hp1->data+hp2->data+c)%10 );
 		//Keep carry for later
@@ -101,13 +102,16 @@ int main(){
 	///h3 will be result from add
 	node *h1=NULL,*h2=NULL,*h3=NULL;
 	printf("Enter number 1\n:");
-	scanf(" %s",add1);
+	fflush(stdin);
+	int n = scanf("%s",add1);
 	printf("Enter number 2\n:");
-	scanf(" %s",add2);
+	fflush(stdin);
+	scanf("%s",add2);
 	//Find length
 	while(add1[add1l++]);
 	while(add2[add2l++]);
-	
+	printf("%d %d",add1l,add2l);
+	//fflush(stdout);
 	///Get total length required
 	add3l = add1l>add2l?add1l:add2l + 1;
 	
@@ -119,14 +123,14 @@ int main(){
 		h2 = insertFront(h2,0);
 	
 	///Insert actual numbers;
-	for(i=0;i<add1l;i++)
+	for(i=0;i<add1l-1;i++)
 		h1 = insertFront(h1,add1[i]-'0');
-	for(i=0;i<add2l;i++)
+	for(i=0;i<add2l-1;i++)
 		h2 = insertFront(h2,add2[i]-'0');
-	//h3 = Add(h1,h2);
-	displayList(h1);
-	displayList(h2);
-	//displayList(h3);
+	h3 = Add(h1,h2);
+	//displayList(h1);
+	//displayList(h2);
+	displayList(h3);
 
 	/**/
 	return 0;
