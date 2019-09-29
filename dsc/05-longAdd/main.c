@@ -74,25 +74,6 @@ node* removeFront(node* head,char *outVar){
 	return head;
 }
 
-node* removeRear(node* head,char *outVar){
-	//char outVar;
-	if(head==NULL){
-		*outVar = -1;
-		return NULL;
-	}else if(head->next == head){
-		*outVar = (char)freeNode(head);
-		return NULL;
-		//return(freeNode(head));
-	}else{
-		node *lastBefore;
-		///Get secondlast element
-		for(lastBefore=head;lastBefore->next->next!=head;lastBefore= lastBefore->next);
-		*outVar = (char)freeNode(lastBefore->next);
-		lastBefore->next = head;
-		return head;
-	}
-}
-
 void displayList(node* ptr){
 	node* tmp=ptr;
 	for(int flag=0;tmp!=NULL&&(tmp!=ptr||flag!=1);tmp=tmp->next){
@@ -150,7 +131,7 @@ int main(){
 	h3 = Add(h1,h2);
 	for(i=0;i<add3l-1;i++){
 		h3 = removeFront(h3,&outVar);
-		printf("%c",outVar==-1?'?':outVar+'0');
+		printf("%c",outVar==-1?'?':i==0&&outVar==0?'\0':outVar+'0');
 	}
 	printf("\n");
 	return 0;
