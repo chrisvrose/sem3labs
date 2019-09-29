@@ -84,19 +84,19 @@ node* Add(node* h1,node* h2){
 		//Add sum result
 		h3 = insertFront(h3,(hp1->data+hp2->data+c)%10 );
 		//Keep carry for later
-		c = (hp1->data+hp2->data) /10;
+		c = (hp1->data+hp2->data+c) /10;
 	}
 	return h3;
 }
 
 int main(){
-	char add1[STRLEN],add2[STRLEN],result[STRLEN],outVar;
+	char add1[STRLEN],add2[STRLEN],outVar;
 	int add1l=0,add2l=0,add3l,i;
 	///h3 will be result from add
 	node *h1=NULL,*h2=NULL,*h3=NULL;
 	printf("Enter number 1\n:");
 	fflush(stdin);
-	int n = scanf("%s",add1);
+	scanf("%s",add1);
 	printf("Enter number 2\n:");
 	fflush(stdin);
 	scanf("%s",add2);
@@ -105,7 +105,7 @@ int main(){
 	while(add2[add2l++]);
 	//fflush(stdout);
 	///Get total length required
-	add3l = add1l>add2l?add1l:add2l + 1;
+	add3l = (add1l>add2l?add1l:add2l) + 1;
 	///Insert into lists
 	///Insert blanks
 	for(i=0;i<add3l-add1l;i++)
