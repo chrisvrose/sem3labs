@@ -74,16 +74,6 @@ node* removeFront(node* head,char *outVar){
 	return head;
 }
 
-void displayList(node* ptr){
-	node* tmp=ptr;
-	for(int flag=0;tmp!=NULL&&(tmp!=ptr||flag!=1);tmp=tmp->next){
-		if(tmp==ptr)flag++;
-		printf("%c",tmp->data+'0');
-	}
-	printf("\n");
-}
-
-
 ///Addition
 node* Add(node* h1,node* h2){
 	node *h3=NULL,*hp1=h1,*hp2=h2;
