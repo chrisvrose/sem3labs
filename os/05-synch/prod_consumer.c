@@ -16,11 +16,11 @@
 sem_t full,empty,mutex;
 int data[SIZE];
 
-
+#define TIMES 5
 
 void* producer(void* arg){
 	int outVar;
-	while(1){
+	for(int i=0;i<TIMES;i++){
 		
 		sem_wait(&empty);
 		sem_wait(&mutex);
@@ -36,7 +36,7 @@ void* producer(void* arg){
 
 void* consumer(void* arg){
 	int outVar;
-	while(1){
+	for(int i=0;i<TIMES;i++){
 		sem_wait(&full);
 		sem_wait(&mutex);
 		sem_getvalue(&full,&outVar);
