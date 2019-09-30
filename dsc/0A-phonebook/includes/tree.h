@@ -2,14 +2,19 @@
 
 #define TREE_H_STRLEN 32
 
+typedef struct Tree{
+	treeNode *root;
+}Tree;
+
+
 ///Contains the tree def
 typedef struct treeNode{
-	treeNode* left;
-	treeNode* right;
+	struct treeNode* left;
+	struct treeNode* right;
 	//Contains data
 	char name[32];
 	int count;
-	node* dataHead;
+	struct node dataHead;
 }treeNode;
 
 
@@ -17,5 +22,5 @@ typedef struct treeNode{
 typedef struct node{
 	///A standard notation is 10-digit number
 	char number[11];
-	node* next;
+	struct node* next;
 }node;
