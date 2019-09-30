@@ -50,3 +50,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+dsc/04-polymul/variant.c
+os/05-synch/output
+os/05-synch/output.txt
