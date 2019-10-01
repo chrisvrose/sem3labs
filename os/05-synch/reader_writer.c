@@ -5,7 +5,7 @@
 #include<semaphore.h>
 #include<unistd.h>
 
-#define TIMES 20
+#define TIMES 9
 
 #define RANDMAX 20
 
