@@ -1,3 +1,16 @@
+/*
+
+General logic:
+
+Addition
+1. Search if exists.
+	True
+		1. Insert into dataHead;
+	False
+		1. Create Tree Element
+
+
+*/
 #define TREE_H
 
 #define TREE_H_STRLEN 32
