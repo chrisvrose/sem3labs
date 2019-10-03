@@ -5,16 +5,19 @@
 #include<semaphore.h>
 #include<unistd.h>
 
-#define TIMES 9
+#define TIMES 10
 
 #define RANDMAX 20
 
 sem_t mutex,wrt;
 int readCount=0;
+int whenToStart=1;
 
-int dataSegment;
+char fn[]="text.txt";
 
 void* reader(void* arg){
+	while(whenToStart);
+	char buffer[RANDMAX];
 	for(int i=0;i<TIMES;i++){
 		sem_wait(&mutex);
 		readCount++;
@@ -23,7 +26,13 @@ void* reader(void* arg){
 		}
 		sem_post(&mutex);
 		//Read
-		printf("R:%d\n",dataSegment);
+		FILE *fp;
+		fp = fopen(fn,"r");
+		fscanf(fp,"%99[^\n]",buffer);
+		printf("R:%s\n",buffer);
+		fclose(fp);
+		//Done read
+
 		sem_wait(&mutex);
 		readCount--;
 		if(readCount==0){
@@ -36,12 +45,17 @@ void* reader(void* arg){
 }
 
 void* writer(void* arg){
+	while(whenToStart);
 	for(int i=0;i<TIMES;i++){
 		sem_wait(&wrt);
 		//Write
-		
-		dataSegment = random()%RANDMAX;
-		printf("W:%d\n",dataSegment);
+		FILE *fp;
+		fp = fopen(fn,"w");
+		int insertVal = random()%RANDMAX;
+		fprintf(fp,"%d",insertVal);
+		fclose(fp);
+		//dataSegment = random()%RANDMAX;
+		printf("W:%d\n",insertVal);
 		sem_post(&wrt);
 	}
 	return NULL;
@@ -55,6 +69,7 @@ int main(){
 	pthread_create(&w,NULL,writer,NULL);
 	pthread_create(&r1,NULL,reader,NULL);
 	pthread_create(&r2,NULL,reader,NULL);
+	whenToStart=0;
 
 	pthread_join(w,NULL);
 	pthread_join(r1,NULL);
