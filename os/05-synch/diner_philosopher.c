@@ -5,7 +5,7 @@
 #include<semaphore.h>
 #include<unistd.h>
 
-#define SIZE 10
+#define SIZE 5
 #define MODADD1(x) (((x)+1)%SIZE)
 
 
@@ -14,7 +14,7 @@
 //#define
 
 ///Chopsticks
-sem_t chopsticks[SIZE],mutex;
+sem_t chopsticks[SIZE],mutex1,mutex2;
 ///State of each philosopher
 char state[SIZE];
 #define THINK 0
@@ -26,33 +26,38 @@ int whenToStart=1;
 void* dinerDoSomething(void* arg){
 	while(whenToStart);
 	int identity = (int)arg;
-	int outVar1,outVar2;
+	int outVar1=0,outVar2=0;
 	//printf("%d\n",identity);
 	for(int i=0;i<MUCHHUNGER;i++){
 		printf("P%d: hunger\n",identity);
 		state[i] = HUNGER;
-		sem_wait(&mutex);
-		sem_getvalue(chopsticks+i,&outVar1);
-		sem_getvalue(chopsticks+MODADD1(i),&outVar2);
-		if(outVar1==1&&outVar2==1){
-			sem_wait(chopsticks+i);
-			sem_wait(chopsticks+MODADD1(i));
-			sem_post(&mutex);
-			state[identity]= CONSUME;
-			printf("P%d:consume\n",identity);
-			sem_wait(&mutex);
-			sem_post(chopsticks+i);
-			sem_post(chopsticks+MODADD1(i));
-			state[identity]=THINK;
+
+		sem_wait(&mutex1);
+		while(outVar1!=1||outVar2!=1){
+			sem_getvalue(chopsticks+i,&outVar1);
+			sem_getvalue(chopsticks+MODADD1(i),&outVar2);
 		}
-		sem_post(&mutex);
+		sem_wait(chopsticks+i);
+		sem_wait(chopsticks+MODADD1(i));
+		sem_post(&mutex1);
+
+		state[identity]= CONSUME;
+		printf("P%d:consume\n",identity);
+
+		sem_wait(&mutex2);
+		sem_post(chopsticks+i);
+		sem_post(chopsticks+MODADD1(i));
+		state[identity]=THINK;
+		
+		sem_post(&mutex2);
 	}
 	return NULL;
 }
 
 
 int main(){
-	sem_init(&mutex,0,1);
+	sem_init(&mutex1,0,1);
+	sem_init(&mutex2,0,1);
 	pthread_t philosopher[SIZE];
 	for(int i=0;i<SIZE;i++){
 		sem_init(chopsticks+i,0,1);
