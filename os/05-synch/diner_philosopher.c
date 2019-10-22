@@ -40,16 +40,16 @@ void* dinerDoSomething(void* arg)
         }
         sem_wait(chopsticks + identity);
         sem_wait(chopsticks + MODADD1(identity));
-        printf("P%d:picking up %d,%d\n", identity, identity, identity + 1);
+        printf("P%d:picking up %d,%d\n", identity, identity, MODADD1(identity));
         sem_post(&mutex1);
 
         state[identity] = CONSUME;
         printf("P%d:consume\n", identity);
 
         sem_wait(&mutex2);
+        printf("P%d: putting down %d,%d\n", identity, identity, MODADD1(identity));
         sem_post(chopsticks + identity);
         sem_post(chopsticks + MODADD1(identity));
-        printf("P%d: putting down %d,%d\n", identity, identity, identity + 1);
         state[identity] = THINK;
 
         sem_post(&mutex2);
