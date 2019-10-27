@@ -15,10 +15,10 @@ Note: This is reference purposes.
 - [X] Process system calls - exec,etc
 - [X] Fork, exec calls
 - [X] Pthreads
-- [ ] Process scheduling
+- [X] Process scheduling
   - [X] Producer, Consumer
-  - [ ] Reader, Writer
-  - [ ] Diners'
+  - [X] Reader, Writer
+  - [X] Diners'
 
 ### DSC
 
@@ -27,3 +27,7 @@ Note: This is reference purposes.
 - [X] Messaging queues - circular
 - [X] Polynomial multiplication using Linked Lists
 - [X] Long addition
+- [X] Sparse Matrix
+- [X] Binary Search Tree
+- [ ] Expression tree
+- [X] Hashing table with Linear Probing
