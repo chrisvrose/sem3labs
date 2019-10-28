@@ -19,6 +19,8 @@ Note: This is reference purposes.
   - [X] Producer, Consumer
   - [X] Reader, Writer
   - [X] Diners'
+- [ ] File Access Control
+- [X] Buddy MemAlloc
 
 ### DSC
 
