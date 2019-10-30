@@ -51,7 +51,7 @@ treeNode* insertNode(treeNode* root,int pid,int sizeAlloc,int* wasAllocated){
 	}
 	//Ended up in edge case
 	if(root->left == NULL && root->right == NULL){
-		//root->isAllocated=-2;
+		root->isAllocated=-1; //You can't allocate a larger memory to a block that has will now be divided into 2 smaller blocks
 		root->left = getNewTreeNode(root->size/2);
 		root->right = getNewTreeNode(root->size/2);
 
