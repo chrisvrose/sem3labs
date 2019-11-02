@@ -36,14 +36,7 @@ treeNode* insertNode(treeNode* root,int pid,int sizeAlloc,int* wasAllocated){
 	///Sanity case
 	if(root==NULL){*wasAllocated = 0;return root;}
 
-	//No need of dividing
-	if(root->size/2 < sizeAlloc&&root->isAllocated==-1){
-		//Store pls
-		*wasAllocated = 1;
-		root->isAllocated=pid;
-		root->amountAllocated= sizeAlloc;
-		return root;
-	}
+	
 	///Test if too small, exit
 	if(root->size<sizeAlloc||root->isAllocated!=-1){
 		*wasAllocated=0;
@@ -51,9 +44,18 @@ treeNode* insertNode(treeNode* root,int pid,int sizeAlloc,int* wasAllocated){
 	}
 	//Ended up in edge case
 	if(root->left == NULL && root->right == NULL){
+		//No need of dividing
+		if(root->size/2 < sizeAlloc&&root->isAllocated==-1){
+			//Store pls
+			*wasAllocated = 1;
+			root->isAllocated=pid;
+			root->amountAllocated= sizeAlloc;
+			return root;
+		}
 		//root->isAllocated=-2;
 		root->left = getNewTreeNode(root->size/2);
 		root->right = getNewTreeNode(root->size/2);
+		
 
 	}
 	//Otherwise
