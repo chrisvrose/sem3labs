@@ -63,7 +63,7 @@ treeNode* insertNode(treeNode* root,int pid,int sizeAlloc,int* wasAllocated){
 	root->left = insertNode(root->left,pid,sizeAlloc,&wasAllocLeft);
 	//Alloc not done
 	if(!wasAllocLeft){
-		root->right = insertNode(root->right,pid,sizeAlloc,&wasAllocLeft);
+		root->right = insertNode(root->right,pid,sizeAlloc,&wasAllocRight);
 	}
 
 
@@ -148,6 +148,7 @@ int main(){
 	int choice,bufferVar1,bufferVar2;char bufferVarS1[32];
 	allocationTree = malloc(sizeof(treeNode));
 	if(!allocationTree) return 0;
+	allocationTree->left = allocationTree->right = NULL;
 	allocationTree->size = 256;
 	allocationTree->amountAllocated = 0;
 	allocationTree->isAllocated = -1;
@@ -175,7 +176,7 @@ int main(){
 				printf("Inorder\n");
 				printf("Space\t\tPID\tAllocated\n");
 				printTree(allocationTree);
-				printf("Preorder\n");
+				printf("Postorder\n");
 				printf("Space\t\tPID\tAllocated\n");
 				printTreePost(allocationTree);
 				break;
