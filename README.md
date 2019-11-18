@@ -20,7 +20,9 @@ Note: This is reference purposes.
   - [X] Reader, Writer
   - [X] Diners'
 - [ ] File Access Control
+- [ ] Banker's Algorithm
 - [X] Buddy MemAlloc
+- [ ] Shared library
 
 ### DSC
 
