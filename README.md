@@ -7,7 +7,7 @@ Note: This is reference purposes.
 ## Topics
 
 - OS
-- Data Structures in C
+- Data Structures
 
 ### OS
 
@@ -19,12 +19,12 @@ Note: This is reference purposes.
   - [X] Producer, Consumer
   - [X] Reader, Writer
   - [X] Diners'
-- [ ] File Access Control
-- [ ] Banker's Algorithm
+- [X] File Access Control
+- [X] Banker's Algorithm - Please refer this [gist]("https://gist.github.com/chrisvrose/79ed90bc47f97bcd2faeb768870303be") for completion/program
 - [X] Buddy MemAlloc
-- [ ] Shared library
+- [ ] Shared library - all about the commands
 
-### DSC
+### DSA
 
 - [X] Stack Operations
 - [X] Infix to Postfix using Stacks
@@ -33,5 +33,5 @@ Note: This is reference purposes.
 - [X] Long addition
 - [X] Sparse Matrix
 - [X] Binary Search Tree
-- [ ] Expression tree
+- [X] Expression tree
 - [X] Hashing table with Linear Probing
